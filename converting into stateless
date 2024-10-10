@@ -1,0 +1,71 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());   //this line  is the start of the program
+}
+
+class MyApp extends StatelessWidget {  
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(   
+     
+    );
+  }
+}
+
+//parent widget
+class CounterScreen extends StatefulWidget {
+  @override
+  _ScreenState createState() => _ScreenState();  // create the state named the screenstate
+}
+
+class _ScreenState extends State<CounterScreen> {
+  int _counter = 0;
+
+  void _incrementCounter() {      // this line allocates the times the user pressed the button
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Counter(
+          counter: _counter,            // this line passes the counter value
+          increment: _incrementCounter, 
+        ),
+      ),
+    );
+  }
+}
+
+
+class Counter extends StatelessWidget {
+  final int counter;                
+  final VoidCallback increment;     
+
+  const Counter({
+    Key? key,
+    required this.counter,
+    required this.increment,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        ElevatedButton(
+          onPressed: increment,        // this line we call the increment
+          child: const Text('Increment'),
+        ),
+        const SizedBox(width: 16),           //created a sized with a width of 16icnhes
+        Text('Count: $counter'),      // and this line display the counter value of the times you pressed
+      ],
+    );
+  }
+}
